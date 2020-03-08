@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成私钥和公钥</title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body{
+            margin: 0 30px;
+        }
+        .link{
+            display: inline-block;
+            margin: 30px 30px 0 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>生成私钥和公钥</h3><br>
+    <p><button id="generateKey" class="btn btn-success">生成</button></p>
+    <p>公钥：</p>
+    <textarea rows="5" class="form-control" id="public_key"></textarea><br>
+    <p>私钥：</p>
+    <textarea rows="5" class="form-control" id="private_key"></textarea>
+    <a href="index.html" class="link" target="_blank">生成私钥和公钥</a>
+    <a href="public.html" class="link" target="_blank">使用公钥加密或解密</a>
+    <a href="private.html" class="link" target="_blank">使用私钥加密或解密</a>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            //生成私钥和公钥
+            $('#generateKey').click(function () {
+                $.ajax({
+                    url: "generateKey.php",
+                    type: "GET",
+                    dataType: "json",
+                    async: false,
+                    success: function (res) {
+                        $("#private_key").val(res.private_key)
+                        $("#public_key").val(res.public_key)
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
