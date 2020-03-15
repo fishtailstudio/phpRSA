@@ -1,20 +1,22 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>使用公钥加密或解密</title>
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body{
+        body {
             margin: 0 30px 30px 30px;
         }
-        .link{
+        .link {
             display: inline-block;
             margin: 30px 30px 0 0;
         }
     </style>
 </head>
+
 <body>
     <h3>使用公钥加密或解密</h3><br>
     <p>公钥：</p>
@@ -30,31 +32,30 @@
     <a href="private.html" class="link" target="_blank">使用私钥加密或解密</a>
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script>
-    jQuery(document).ready(function() {
         //公钥加密
-        $('#public_encrypt').click(function(){
+        $('#public_encrypt').click(function () {
             var public_key = $("#public_key").val();
             var text = $("#text").val();
             var text_encode = $("#text_encode");
-            if(public_key==""){
+            if (public_key == "") {
                 alert("请输入公钥");
                 return false;
             }
-            if(text==""){
+            if (text == "") {
                 alert("请输入待加密的文本");
                 return false;
             }
             $.ajax({
-                url:"public_encrypt.php",
-                data:{
-                    public_key:public_key,
-                    text:text
+                url: "public_encrypt.php",
+                data: {
+                    public_key: public_key,
+                    text: text
                 },
-                type:"POST",
-                dataType:"json",
-                async:false,
-                success:function(res){
-                    if(res.status!=0){
+                type: "POST",
+                dataType: "json",
+                async: false,
+                success: function (res) {
+                    if (res.status != 0) {
                         alert("加密失败");
                         return false;
                     }
@@ -63,29 +64,29 @@
             });
         });
         //公钥解密
-        $('#public_decrypt').click(function(){
+        $('#public_decrypt').click(function () {
             var public_key = $("#public_key").val();
             var text = $("#text");
             var text_encode = $("#text_encode").val();
-            if(public_key==""){
+            if (public_key == "") {
                 alert("请输入公钥");
                 return false;
             }
-            if(text_encode==""){
+            if (text_encode == "") {
                 alert("请输入待解密的文本");
                 return false;
             }
             $.ajax({
-                url:"public_decrypt.php",
-                data:{
-                    public_key:public_key,
-                    text_encode:text_encode
+                url: "public_decrypt.php",
+                data: {
+                    public_key: public_key,
+                    text_encode: text_encode
                 },
-                type:"POST",
-                dataType:"json",
-                async:false,
-                success:function(res){
-                    if(res.status!=0){
+                type: "POST",
+                dataType: "json",
+                async: false,
+                success: function (res) {
+                    if (res.status != 0) {
                         alert("解密失败");
                         return false;
                     }
@@ -93,7 +94,7 @@
                 }
             });
         });
-    });
     </script>
 </body>
+
 </html>
